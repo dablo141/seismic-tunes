@@ -573,7 +573,7 @@ const SONGS = [
     id:'baa',
     title:'Baa Baa Black Sheep',
     picker:'Aurah',
-    emoji:'Aurah.JPG',
+    avatar:GITHUB_RAW + 'Aurah.JPG',
     midi: GITHUB_RAW + 'baa.mid',
     bg:'linear-gradient(135deg,#401020,#200810)',
     diff:1,
@@ -1177,12 +1177,16 @@ function renderGrid() {
     const dots=[1,2,3].map(d=>`<div class="diff-dot ${d<=song.diff?dotClass:''}"></div>`).join('');
 
     card.innerHTML=`
-      <div class="card-loading-ring" id="ring_${song.id}"><div class="spinner"></div></div>
-      <div class="card-avatar" style="background:${song.bg}" id="avatar_${song.id}">${song.emoji}</div>
-      <div class="card-picker">${song.picker}'s pick</div>
-      <div class="card-title">${song.title}</div>
-      <div class="card-diff">${dots}</div>
-    `;
+  <div class="card-loading-ring" id="ring_${song.id}"><div class="spinner"></div></div>
+
+  <div class="card-avatar" style="background:${song.bg}" id="avatar_${song.id}">
+    ${song.avatar ? `<img src="${song.avatar}" alt="${song.picker}">` : song.emoji}
+  </div>
+
+  <div class="card-picker">${song.picker}'s pick</div>
+  <div class="card-title">${song.title}</div>
+  <div class="card-diff">${dots}</div>
+`;
     card.onclick=()=>openSong(song,card);
     grid.appendChild(card);
   });
